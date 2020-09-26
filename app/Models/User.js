@@ -20,9 +20,12 @@ class User extends Model {
     this.addHook('beforeSave', async (userInstance) => {
       if (userInstance.dirty.password) {
         userInstance.password = await Hash.make(userInstance.password)
-        i = userInstance.password
       }
     })
+  }
+
+  static get hidden() {
+    return ['password']
   }
 
   /**

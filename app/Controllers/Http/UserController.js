@@ -7,6 +7,9 @@
 /**
  * Resourceful controller for interacting with users
  */
+
+const User = use('App/Models/User')
+
 class UserController {
   /**
    * Show a list of all users.
@@ -30,7 +33,27 @@ class UserController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store({ request, response }) {
+  async store({ request, response, auth }) {
+    const data = request.all();
+
+    try {
+      const user = await User.create(data);
+      const token = await auth.generate(user);
+
+      return response.json({
+        status: 'success',
+        data: token
+      });
+    }
+    catch (error) {
+      return response.status(400).json({
+        status: 'error',
+        message: 'Houve um problema em sua requisicao'
+      });
+    }
+
+
+    return token;
   }
 
   /**

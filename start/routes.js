@@ -18,3 +18,8 @@ const Route = use('Route')
 
 Route.on('/').render('welcome')
 
+Route.group(() => {
+  Route.resource('users', 'UserController').apiOnly();
+
+  Route.post('/auth', 'AuthController.authenticate');
+});
