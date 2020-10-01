@@ -19,17 +19,7 @@ class AuthController {
         message: 'Email ou senha incorretos.'
       });
     }
-
-
-
-
-    return
   }
-
-  async logout() {
-
-  }
-
 }
 
 module.exports = AuthController

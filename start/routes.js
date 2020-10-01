@@ -23,3 +23,11 @@ Route.group(() => {
 
   Route.post('/auth', 'AuthController.authenticate');
 });
+
+
+Route.group(() => {
+  Route.post('/tweet', 'TweetController.tweet')
+  Route.get('/tweets/:id', 'TweetController.show')
+  Route.post('/tweets/reply/:id', 'TweetController.reply')
+  Route.delete('/tweets/destroy/:id', 'TweetController.destroy')
+}).middleware(['auth'])
